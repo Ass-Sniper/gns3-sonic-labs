@@ -7,11 +7,11 @@
 
 在开始实验之前，建议阅读以下归档指南，涵盖了从硬件选型到系统运维的核心知识：
 
-1. **[环境搭建：01]** [GNS3 + Broadcom SONiC 实验环境搭建 (Web UI 版)](docs/01_gns3_sonic_setup.md)
-2. **[实验手册：02]** [SONiC BGP 基础路由实验手册](docs/02_bgp_basic_manual.md)
-3. **[运维安全：03]** [SONiC 节点安全维护与配置导出导入](docs/03_security_config.md)
-4. **[工具科普：04]** [仿真平台选型：PNETLab 与 ContainerLab 深度解析](docs/04_platform_comparison.md)
-5. **[硬件选型：05]** [畅网 Linux 实验主机选型指南](docs/05_hardware_selection.md)
+1. **[环境搭建：01]** [GNS3 + Broadcom SONiC 实验环境搭建 (Web UI 版)](docs/setup-guides/01_gns3_sonic_webui.md)
+2. **[实验手册：02]** [SONiC BGP 基础路由实验手册](docs/setup-guides/02_bgp_basic_manual.md)
+3. **[运维安全：03]** [SONiC 节点安全维护与配置导出导入](docs/setup-guides/03_security_and_config.md)
+4. **[工具科普：04]** [仿真平台选型：PNETLab 与 ContainerLab 深度解析](docs/setup-guides/04_pnetlab_containerlab_intro.md)
+5. **[硬件选型：05]** [畅网 Linux 实验主机选型指南](docs/setup-guides/05_linux_host_selection.md)
 
 ---
 
