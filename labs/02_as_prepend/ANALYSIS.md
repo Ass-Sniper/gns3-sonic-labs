@@ -10,9 +10,13 @@ sequenceDiagram
     participant S1 as Node_201 (10.1.1.1)
     participant S2 as Node_202 (10.1.1.2)
 
+    Note over S1, S2: [阶段 0] 正常状态 (无 Prepend 策略)
+    S2->>S1: BGP UPDATE (Prefix: 2.2.2.2/32, Path: 65002)
+    Note right of S2: 路径长度为 1
+
     Note over S1, S2: [阶段 1] 策略触发：会话重置
     S1->>S2: BGP NOTIFICATION (Cease: Administratively Reset)
-    Note right of S1: 脚本执行 clear ip bgp 导致 TCP 断开
+    Note right of S1: 脚本执行 clear ip bgp 导致 TCP 断开并重新同步
 
     Note over S1, S2: [阶段 2] 状态机重建 (Open/Confirm)
     S1->>S2: BGP OPEN (My AS: 65001, ID: 1.1.1.1)
@@ -26,12 +30,24 @@ sequenceDiagram
     rect rgb(240, 248, 255)
     Note right of S2: 核心观察点：202 应用 Outbound 策略
     S2->>S1: BGP UPDATE (Prefix: 2.2.2.2/32, Path: 65002 65002 65002 65002)
+    Note right of S2: 路径长度变为 4
     end
 
     Note over S1, S2: [阶段 4] 路由防环与回传
     S2->>S1: BGP UPDATE (Prefix: 1.1.1.1/32, Path: 65002 65002 65002 65002 65001)
 
 ```
+#### **对比分析：策略生效前后**
+
+1. **路径长度变化**：
+* **策略前 (Baseline)**：AS_PATH 仅包含始发自治系统 `65002`。
+* **策略后 (Experiment)**：AS_PATH 被人为填充为 `65002 65002 65002 65002`。
+
+
+2. **选路决策影响**：
+对于 Node_201 而言，如果有另一个邻居（假设为 Node_203）也通告 `2.2.2.2/32` 且路径长度小于 4，根据 BGP 选路原则第 4 条（Shortest AS_PATH），Node_201 将**放弃** Node_202 的路径。
+3. **防环机制**：
+观察 **阶段 4**，即便路径被填充，末尾依然保留了原始的 `65001`。这证明 Prepend 是在既有 AS_PATH 基础上进行的 **加权（Stacking）**，不会破坏 BGP 原有的环路检测逻辑。
 
 ---
 
