@@ -52,5 +52,7 @@ python scripts/full_lab_with_download.py labs/02_as_prepend/inventory.json
 
 * [x] 实验 01：BGP Peering 基础建立
 * [x] 实验 02：AS-PATH Prepend 控制入向流量
+  - [配置参考](labs/02_as_prepend/config_202.conf)
+  - [协议深度解读 (含 Mermaid 交互图)](labs/02_as_prepend/ANALYSIS.md)  <-- 重点推荐
 * [ ] 实验 03：Local Preference 控制出向流量
 * [ ] 实验 04：BGP Community 属性打标与过滤
