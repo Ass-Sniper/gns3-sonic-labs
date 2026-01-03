@@ -1,0 +1,27 @@
+{
+    "common": {
+        "user": "admin",
+        "pash": "admin123",
+        "port": 22,
+        "timeout": 10,
+        "cmd_delay": 0.2
+    },
+    "nodes": {
+        "192.168.100.201": {
+            "as": "65001",
+            "router_id": "1.1.1.1",
+            "neighbor": "10.1.1.2",
+            "remote_as": "65002",
+            "network": "1.1.1.1/32",
+            "conf_file": "config_201.conf"
+        },
+        "192.168.100.202": {
+            "as": "65002",
+            "router_id": "2.2.2.2",
+            "neighbor": "10.1.1.1",
+            "remote_as": "65001",
+            "network": "2.2.2.2/32",
+            "conf_file": "config_202.conf"
+        }
+    }
+}
